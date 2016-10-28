@@ -1,0 +1,38 @@
+.question_img{
+  width: 100%;
+}
+
+.small_img{
+  width: 100%;
+}
+
+.left{
+  margin-left: 30px;
+}
+
+.star{
+  width: 100%;
+  display: none;
+}
+
+.my_footer{
+  height: 10em;
+}
+
+.error{
+  color: red;
+}
+
+.my_header{
+  height: 7em;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+main {
+    flex: 1 0 auto;
+  }

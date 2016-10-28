@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load staticfiles %}
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <link rel="stylesheet" href="{% static 'learning_app/css/main.css' %}"
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8">
+    <title>Third Grade</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper teal lighten-2">
+        <a href="#" class="brand-logo left">SAGE</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="{% url 'learning:stuck' %}">Stumped?</a></li>
+          <li><a href="{% url 'learning:logout' %}">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="col s12">
+            <img src="{% static user.pic_url %}" alt="Image showing Question" class='question_img'/>
+          </div> <!-- end of col -->
+        </div> <!-- end of row -->
+        <div class="row">
+          <form class="col s12" action="{% url 'learning:third_answer' id=user.question_on %}" method="POST">
+            {% csrf_token %}
+            <div class="input-field col s6">
+              <label for="answer">Answer:</label>
+              <input type="text" name="answer" class="validate">
+            </div> <!-- end of input field -->
+            <div class="col s6">
+              <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+              </button>
+            </div>  <!-- end of col -->
+          </form>
+        </div> <!-- end of row -->
+        <div class="row">
+          <div class="col s6">
+            {% if messages %}
+            <ul class="messages">
+              {% for message in messages %}
+              <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div> <!-- end of col -->
+        </div> <!-- end of row -->
+      </div> <!-- end of container -->
+    </main>
+    <footer class="page-footer teal lighten-2 my_footer">
+    </footer>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+  </body>
+</html>

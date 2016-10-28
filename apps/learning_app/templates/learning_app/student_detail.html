@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8">
+    <title>Student Detail</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'learning_app/css/main.css' %}">
+  </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper teal lighten-2">
+        <a href="#" class="brand-logo left">SAGE</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="{% url 'learning:console' %}">Return</a></li>
+        </ul>
+      </div>
+    </nav>
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="col s12">
+            <h3 class="center-align">{{name}}</h3>
+          </div> <!-- end of col -->
+        </div> <!-- end of row -->
+        <div class="row">
+          <div class="col s12">
+            <table class="striped">
+              <thead>
+                <tr>
+                    <th data-field="name">Name</th>
+                    <th data-field="question_1">Third Grade 1</th>
+                    <th data-field="question_2">Third Grade 2</th>
+                    <th data-field="question_3">Third Grade 3</th>
+                    <th data-field="question_4">Third Grade 4</th>
+                    <th data-field="question_5">Third Grade 5</th>
+                    <th data-field="question_6">Third Grade 6</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{name}}</td>
+                  {% for time in student_times %}
+                  <td>{{time}}</td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  <td>All Students</td>
+                  {% for q,time in average_times %}
+                  <td>{{time}}</td>
+                  {% endfor %}
+                </tr>
+              </tbody>
+            </table>
+          </div> <!-- end of col -->
+        </div> <!-- end of row -->
+      </div> <!-- end of container -->
+    </main>
+    <footer class="page-footer teal lighten-2 my_footer">
+    </footer>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+  </body>
+</html>
