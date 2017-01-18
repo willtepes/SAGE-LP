@@ -65,7 +65,7 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     def pic_url(self):
-        return 'learning_app/img/third_grade_' +str(self.question_on) + '.png'
+        return 'learning_app/img/third-grade-' +str(self.question_on) + '.png'
 
 
     objects = UserManager()

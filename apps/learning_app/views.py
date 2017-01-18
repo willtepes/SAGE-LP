@@ -147,8 +147,11 @@ def stuck(request):                     #When stumped button is clicked - genera
     student = User.objects.get(id=request.session['user']['id'])
     students = User.objects.filter(question_on=student.question_on).exclude(id=student.id).exclude(is_admin=True)
     errors = []
-    for student in students:
-        errors.append(student.name + " is also working on this problem. Perhaps you can work together.")
+    if len(students) == 0:
+        errors.append("No classmates are currently working on this problem. Please reach out to your teacher for further assistance.")
+    else:
+        for student in students:
+            errors.append(student.name + " is also working on this problem. Perhaps you can work together.")
     print_messages(request, errors)
     return redirect('learning:progress')
 
