@@ -12,7 +12,7 @@ def login(request):
     if request.method == 'POST':
         valid = User.objects.login(request.POST)
 
-        if valid[0] == False:
+        if valid[0] is False:
             print_messages(request, valid[1])
             return redirect('users:index')
 
@@ -36,7 +36,7 @@ def register(request):
 
         valid = User.objects.register(request.POST)
 
-        if valid[0] == False:
+        if valid[0] is False:
             print_messages(request, valid[1])
             return redirect('learning:console')
 
@@ -49,10 +49,10 @@ def teacher_login(request):
             return redirect('learning:console')
         else:
             valid = User.objects.login(request.POST)
-            if valid[0] == False:
+            if valid[0] is False:
                 print_messages(request, valid[1])
                 return redirect('users:index')
-            if valid[1].is_admin == False:
+            if valid[1].is_admin is False:
                 errors = []
                 errors.append("You do not have teacher privilages.")
                 print_messages(request, errors)

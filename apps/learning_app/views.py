@@ -11,8 +11,8 @@ def index(request):                             #localhost redirects to login pa
 
 def q_of_day(request):
     qod = Learning.objects.all()                          #Loads the quetion of the day after successful login
-    context={
-    'page': qod[0],
+    context = {
+        'page': qod[0],
     }
     return render(request, 'learning_app/q_of_day.html', context)
 
@@ -36,7 +36,7 @@ def q_of_day_answer(request, id):              #Checks answer to QofD based on I
 def correct(request, id):                           # adds stars for correct answer and loads correct page, increments question_on
     user = User.objects.get(id=request.session['user']['id'])
     if id == '1':
-        Time.objects.end_time(user.id,user.question_on)
+        Time.objects.end_time(user.id, user.question_on)
     user.stars = user.stars + 2
     user.question_on = user.question_on + 1
     user.save()
@@ -96,17 +96,17 @@ def third_answer(request, id):                      # checks answer of third gra
 
 def ahead_check(request, user):             #checks if student is far enough ahead of the class to load additional content
     students = User.objects.all()
-    sum = 0;
-    count =0;
+    sum = 0
+    count = 0
     for student in students:
-        sum+=student.question_on
-        count+=1
+        sum += student.question_on
+        count += 1
     if user.question_on >= (sum/count+2):
         return True
     else:
         return False
 
-def console(request):                   #checks if Learning db is emply and creates entry for qod if needed - then loads admin console will all user info and question of the day.
+def console(request):                   #checks if Learning db is emply and creates entry for QofD if needed - then loads admin console wilh all user info and question of the day.
     if User.objects.admin_exists():
         if 'user' not in request.session:
             return redirect('users:index')
@@ -116,10 +116,10 @@ def console(request):                   #checks if Learning db is emply and crea
     if Learning.objects.count() == 0:
         Learning.objects.create()
     qod = Learning.objects.all()
-    context={
-    'page': qod[0],
-    'students': User.objects.filter(is_admin=False),
-    'qod': [1,2],
+    context = {
+        'page': qod[0],
+        'students': User.objects.filter(is_admin=False),
+        'qod': [1, 2],
     }
     return render(request, 'learning_app/admin.html', context)
 
@@ -136,7 +136,7 @@ def logout(request):                    #Logs user out of session
 
 def student_detail(request, id):        #gets time taken per question for student selected as well as average time taken for all students
     student = User.objects.get(id=id)
-    context={
+    context = {
         'student_times': Time.objects.get_times(student),
         'average_times': sorted(Time.objects.avg_times().items()),
         'name': student.name,
