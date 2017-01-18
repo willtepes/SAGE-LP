@@ -36,27 +36,27 @@ class TimeManager(models.Manager):
         for number in questions:
             temp = Time.objects.filter(question=number['question']).filter(is_done=True).filter(student__is_admin=False)
             if temp:
-                total=0
+                total = 0
                 for entry in temp:
-                    total+=(entry.time_finished - entry.created_at).seconds
-                avg_times[number['question']]=(total/len(temp))
+                    total += (entry.time_finished - entry.created_at).seconds
+                avg_times[number['question']] = (total/len(temp))
         return avg_times
 
 
 
 class Learning(models.Model):
     question_day = models.IntegerField(default=1)
-    created_at = models.DateTimeField(auto_now_add = True)
-    updated_at = models.DateTimeField(auto_now = True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     def pic_url(self):
-        return 'learning_app/img/q_of_day_'  +str(self.question_day) + '.png'
+        return 'learning_app/img/q-of-day-'  +str(self.question_day) + '.png'
 
 class Time(models.Model):
     student = models.ForeignKey('login_reg_app.User', related_name='time_taken')
     question = models.IntegerField()
     time_finished = models.DateTimeField()
     is_done = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add = True)
-    updated_at = models.DateTimeField(auto_now = True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     objects = TimeManager()
