@@ -49,7 +49,7 @@ class Learning(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def pic_url(self):
-        return 'learning_app/img/q-of-day-'  +str(self.question_day) + '.png'
+        return 'learning_app/img/q-of-day-'  +str(self.question_day) + '.jpg'
 
 class Time(models.Model):
     student = models.ForeignKey('login_reg_app.User', related_name='time_taken')
